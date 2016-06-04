@@ -1,5 +1,5 @@
 # C-TestWatcher
-This is a powershell script for watching a solution folder for *.cs file changes and running unit tests.
+This is a powershell script for watching a solution folder for *.cs (uses FileSystemWatcher) file changes and running unit tests.
 
 ##Requirements
  - Windows with powershell
