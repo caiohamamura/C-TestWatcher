@@ -1,6 +1,23 @@
 $script:testCategory
 ### SET FOLDER TO WATCH + FILES TO WATCH + SUBFOLDERS YES/NO
-$env:testCategory=$args[0]    
+$env:testCategory=$args[0]
+$env:target='Debug'
+if ($($args.Count) -gt 1) {
+    $env:target=$args[1]
+}
+$env:platform='AnyCPU'
+if ($($args.Count) -gt 2) {
+    $env:platform=$args[2]
+}
+if ($env:platform -eq 'AnyCPU') {
+    $env:platformTest='x64'    
+} else {
+    $env:platformTest=$env:platform
+}
+if ($($args.Count) -gt 3) {
+    $env:platformTest=$args[3]
+}
+
 $curPath = Convert-Path .
 $leafPath = Split-Path ($curPath) -Leaf
 $watcher = New-Object System.IO.FileSystemWatcher
@@ -15,14 +32,14 @@ $curPath = Convert-Path .
 $action = {
     Write-Host
     Write-Host
-    Write-Host "Rebuilding test..."  -foregroundcolor "magenta"
-    Write-Host
     $curPath = Convert-Path .
     $leafPath = Split-Path ($curPath) -Leaf
-    $result = & msbuild
+    $result = & msbuild $('/p:Configuration='+$env:target) $('/p:Platform='+$env:platform) | Out-String
+    Write-Host $result
+    Write-Host
     Write-Host "Testing..."  -foregroundcolor "magenta"
     Write-Host
-    $result = & vstest.console $('"bin\Debug\'+$leafPath+'.dll"') '/Platform:x64' $('/TestCaseFilter:TestCategory='+$env:testCategory) | Out-String
+    $result = & vstest.console $('"bin\'+$env:target+'\'+$leafPath+'.dll"') $('/Platform:'+$env:platformTest) $('/TestCaseFilter:TestCategory='+$env:testCategory) | Out-String
     Write-Host $result
 
 }    
