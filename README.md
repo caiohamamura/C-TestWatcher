@@ -22,7 +22,7 @@ The .bat file is configured to run in Visual Studio 2015. If this is not your ve
 In your test file you have to specify a TestCategory
 
     [TestMethod, TestCategory("AnyCategory")]
-    public TestMethod() ...
+    public void TestMethod() ...
 
 Then you open a command prompt inside your test project path and run the command:
 
