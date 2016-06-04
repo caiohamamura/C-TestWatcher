@@ -24,6 +24,6 @@ In your test file you have to specify a TestCategory
     [TestMethod, TestCategory("AnyCategory")]
     public void TestMethod() ...
 
-Then you open a command prompt inside your test project path and run the command:
+Then in a command prompt inside your test project path and run the command:
 
     watchTest {AnyCategory} {TargetSetting [Debug]} {BuildPlatform [AnyCPU]} {TestPlatform [x64]}
