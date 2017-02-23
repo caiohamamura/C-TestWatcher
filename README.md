@@ -51,7 +51,8 @@ The  VSTest.console is a MS Visual Studio 2012+ command line tool for running t
 
 You can run all tests, specify which tests will run by calling its name using /Tests:Test1,Test2 switch or filter which tests will run using /TestCaseFilter switch. The TestCaseFilter switch can filter through:
 
-TestCategory: set before method declaration through the attribute [TestCategory("MyCategory")]
-Priority: set before method declaration through the attribute [Priority(0)]
-Name: providing the full name including the namespace.
+ - TestCategory: set before method declaration through the attribute [TestCategory("MyCategory")]
+ - Priority: set before method declaration through the attribute [Priority(0)]
+ - Name: providing the full name including the namespace.
+
 The documentation also claims that it can use a *.runsettings xml file, but I couldn't find how to create such file properly in the documentation.
